@@ -13,7 +13,7 @@ Template::header("Products");
 foreach($products as $product): ?>
 
 <div class="product">
-    <img src="<?= $product->img_url ?>" width="100" height="100" alt="Product image">
+    <img src="<?= $product->img_url ?>" alt="Product image" class="product-image">
     <b><?= $product->title ?></b>
     <i><?= $product->price ?> kr</i>
     <p><?= $product->description ?></p>

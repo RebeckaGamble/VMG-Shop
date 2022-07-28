@@ -42,6 +42,7 @@ else {
 
 if($success) {
     header("Location: /vmg/pages/admin.php");
+    die();
 }
 else {
     die("Error saving product");

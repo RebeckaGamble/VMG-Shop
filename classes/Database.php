@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    private $host = "localhost:8889";
+    private $host = "localhost";
     private $user = "root";
     private $pass = "root";
     private $db = "vmg-db";

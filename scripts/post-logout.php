@@ -7,4 +7,4 @@ unset($_SESSION["user"]);
 
 session_destroy();
 
-header("Location: /vmg");
+header("Location: /vmg/");

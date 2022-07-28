@@ -33,23 +33,23 @@ if ($product == null) : ?>
 
 <?php else : ?>
 
-    <form action="/vmg/admin-scripts/post-update-product.php" enctype="multipart/form-data">
-        <img src="<?= $product->img_url ?>" alt=""> <br>
-        <input type="text name="title" placeholder="Title" value="<?= $product->title?>"> <br>
-        <textarea name="description" placeholder="Description"><?= $product->description ?></textarea>
-        <input type="number" name="price" placeholder="Price" value="<?= $product->price ?>"> <br>
-        <input type="file" name="image" accept="image/*"> <br>
-        <input type="submit" value=" Update & Save">
-        <a href="/vmg/pages/admin.php">Back to products</a>
-    </form>
+<form action="/vmg/admin-scripts/post-update-product.php?id=<?= $_GET["id"] ?>" enctype="multipart/form-data">
+    <img src="<?= $product->img_url ?>" alt=""> <br>
+    <input type="text" name="title" placeholder="Title" value="<?= $product->title?>"> <br>
+    <textarea name="description" placeholder="Description"><?= $product->description ?></textarea>
+    <input type="number" name="price" placeholder="Price" value="<?= $product->price ?>"> <br>
+    <input type="file" name="image" accept="image/*"> <br>
+    <input type="submit" value="Save">
+    <a href="/vmg/pages/admin.php">Back to products</a>
+</form>
 
-    <p>
-        <b>Delete:</b>
-    </p>
-    <form action="/vmg/admin-scripts/post-delete-product.php" method="post">
-        <input type="hidden" name="id" value="<?= $_GET["id"] ?> ">
-        <input type="submit" value="Delete product">
-    </form>
+<p>
+    <b>Delete:</b>
+</p>
+<form action="/vmg/admin-scripts/post-delete-product.php" method="post">
+    <input type="hidden" name="id" value="<?= $_GET["id"] ?> ">
+    <input type="submit" value="Delete product">
+</form>
 
 <?php
 

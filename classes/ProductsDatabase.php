@@ -22,7 +22,7 @@ class ProductsDatabase extends Database {
 
         if ($db_product) {
 
-            $product = new Product ( $db_product["title"], $db_product["description"], $db_product["price"], $db_product["img"], $id );
+            $product = new Product ( $db_product["title"], $db_product["description"], $db_product["price"], $db_product["img-url"], $id );
 
         }
 
@@ -44,7 +44,7 @@ class ProductsDatabase extends Database {
             $db_title = $db_product["title"];
             $db_description = $db_product["description"];
             $db_price = $db_product["price"];
-            $db_img_url = $db_product["img"];
+            $db_img_url = $db_product["img-url"];
 
 
             $products[] = new Product($db_title, $db_description, $db_price, $db_img_url, $db_id);
@@ -54,7 +54,7 @@ class ProductsDatabase extends Database {
     }
     
     public function create(Product $product){
-        $query = "INSERT INTO products (title, `description`, price, `img`) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO products (title, `description`, price, `img-url`) VALUES (?, ?, ?, ?)";
 
         $stmt = mysqli_prepare($this->conn, $query);
 
@@ -66,7 +66,7 @@ class ProductsDatabase extends Database {
     }
 
     public function update_product(Product $product, $id){
-        $query = "UPDATE products SET `title`=?, `description`=?, price=?, `img`=? WHERE id=?";
+        $query = "UPDATE products SET `title`=?, `description`=?, price=?, `img-url`=? WHERE id=?";
         
         $stmt = mysqli_prepare($this->conn, $query);
 

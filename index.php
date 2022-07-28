@@ -1,5 +1,7 @@
 <?php
 // http://localhost/vmg/
+
+
 require_once __DIR__ . "/classes/Template.php";
 
 Template::header("VMG shop");
@@ -13,5 +15,7 @@ Template::header("VMG shop");
             cupiditate hic itaque culpa ab?
         </p>
     </div>
+
+    
 <?php
 Template::footer();

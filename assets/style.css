@@ -5,11 +5,10 @@
 
 .header {
    padding:0%;
-   
 }
 
 .background-image {
- padding: auto;
+    padding: auto;
 }
 
 .nav-title {
@@ -26,16 +25,13 @@
     text-align: center;
 }
 
-html {
-    background: rgb(213, 186, 190);
-}
+
 
 body {
     background: white;
-    max-width: 98%;
+    max-width: 100%;
     min-height: 100vh;
-    margin: 20px auto;
-    padding: 2%;
+    
 }
 
 .product {
@@ -46,6 +42,60 @@ body {
 }
 
 .footer {
-    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 5%;
+    background-color: rgb(244, 242, 242);
     padding: 2%;
+}
+
+.footer.footer-container {
+    height: 300px;
+    position: fixed;
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    justify-content: space-evenly;
+    padding-bottom: 2%;
+}
+
+.vmg {
+    justify-content: flex-start;
+    text-align: left;
+    width: 25%;
+    line-height: 17px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.contact {
+    text-align: left;
+    flex-direction: column;
+}
+
+.pay-with {
+    font-size: 14px;
+    text-align: left;
+}
+
+.info {
+    text-align: left;
+    flex-direction: column;
+}
+
+.bottom {
+    text-align: center;
+    border-top: 1px solid gray;
+    font-size: 14px;
+    border-bottom: 1px solid gray;
+}
+
+.bottom-title {
+    color: gray;
 }

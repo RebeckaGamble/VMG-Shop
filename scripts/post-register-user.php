@@ -34,7 +34,7 @@ else {
 }
 
 if ($success) {
-    header ("Location: /vmg/pages/login.php");
+    header ("Location: /vmg/pages/register-success.php");
 }
 else {
     die("Error saving user");

@@ -3,10 +3,10 @@ require_once __DIR__ . "/User.php";
 
 session_start();
 
-class Template 
+class Template
 {
-    public static function header($title) 
-    { 
+    public static function header($title)
+    {
         $is_logged_in = isset($_SESSION["user"]);
 
         $logged_in_user = $is_logged_in ? $_SESSION["user"] : null;
@@ -15,9 +15,10 @@ class Template
 
         $cart_count = isset($_SESSION["cart"]) ? count($_SESSION["cart"]) : 0;
 
-        ?>
+?>
         <!DOCTYPE html>
         <html lang="en">
+
         <head>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,22 +43,23 @@ class Template
                     <a href="/vmg/pages/login.php">Login</a>
                     <a href="/vmg/pages/register.php">Register</a>
 
-                <?php elseif($is_admin): ?>
+                <?php elseif ($is_admin) : ?>
                     <a href="/vmg/pages/admin.php">Admin page</a>
                 <?php endif; ?>
 
             </nav>
 
-            <?php if ($is_logged_in) : ?> 
+            <?php if ($is_logged_in) : ?>
                 <p>
                     <b>Logged in as: </b>
                     <?= $logged_in_user->username ?>
 
-                    <form action="/vmg/scripts/post-logout.php" method="post">
-                        <input type="submit" value="Logout">
-                    </form>
+                <form action="/vmg/scripts/post-logout.php" method="post">
+                    <input type="submit" value="Logout">
+                </form>
                 </p>
             <?php endif; ?>
+<<<<<<< Updated upstream
         
 
         <hr>
@@ -125,3 +127,26 @@ class Template
     </html>
     <?php  }
 }
+=======
+
+
+            <hr>
+        <?php
+    }
+
+    public static function footer()
+    {
+        ?>
+            <hr>
+            <footer class="footer">
+                Copyright VMG 2022
+            </footer>
+
+            <script src="/vmg/assets/script.js"></script>
+
+        </body>
+
+        </html>
+<?php  }
+}
+>>>>>>> Stashed changes

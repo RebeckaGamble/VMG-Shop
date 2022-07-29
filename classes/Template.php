@@ -59,7 +59,6 @@ class Template
                 </form>
                 </p>
             <?php endif; ?>
-<<<<<<< Updated upstream
         
 
         <hr>
@@ -127,26 +126,3 @@ class Template
     </html>
     <?php  }
 }
-=======
-
-
-            <hr>
-        <?php
-    }
-
-    public static function footer()
-    {
-        ?>
-            <hr>
-            <footer class="footer">
-                Copyright VMG 2022
-            </footer>
-
-            <script src="/vmg/assets/script.js"></script>
-
-        </body>
-
-        </html>
-<?php  }
-}
->>>>>>> Stashed changes

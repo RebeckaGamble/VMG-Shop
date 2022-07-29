@@ -25,16 +25,10 @@ $product = $products_db->get_one($_GET["id"]);
 //    die ("No product!");
 //}
 
-Template::header("Update product");
-
-if ($product == null) : ?>
-
-    <h2>No product</h2>
-
-<?php else : ?>
+Template::header("Update product"); ?>
 
     <form action="/vmg/admin-scripts/post-update-product.php" enctype="multipart/form-data">
-        <img src="<?= $product->img_url ?>" alt=""> <br>
+        <div> <img src="<?= $product->img_url ?>" alt=""> <br> </div>
         <input type="text name="title" placeholder="Title" value="<?= $product->title?>"> <br>
         <textarea name="description" placeholder="Description"><?= $product->description ?></textarea>
         <input type="number" name="price" placeholder="Price" value="<?= $product->price ?>"> <br>
@@ -52,7 +46,5 @@ if ($product == null) : ?>
     </form>
 
 <?php
-
-endif;
 
 Template::footer();

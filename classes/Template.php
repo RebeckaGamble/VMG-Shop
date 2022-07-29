@@ -26,11 +26,18 @@ class Template
             <title><?= $title ?> </title>
             <link rel="stylesheet" href="/vmg/assets/style.css">
             <script src="https://kit.fontawesome.com/392acbfbb6.js" crossorigin="anonymous"></script>
+
+            
         </head>
 
         <body>
+        <p class="banner">
+                Fri frakt över 499 kr
+                Snabb klimatkompenserad leverans
+                Säkra betalningar</p>
+        <div class="body2">
             <div class="header">
-                <img src="/vmg/assets/back.jpeg" alt="vase" class="background-image" />
+
                 <h1 class="nav-title"><?= $title ?></h1>
             </div>
 

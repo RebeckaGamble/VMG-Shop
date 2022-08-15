@@ -36,8 +36,7 @@ if(isset($_POST["title"]) && isset($_POST["description"]) && isset($_POST["price
     } 
 }
 else {
-    echo "Invalid input";
-    var_dump($_POST);
+    echo "Invalid input <br>" ;
 }
 
 if($success) {

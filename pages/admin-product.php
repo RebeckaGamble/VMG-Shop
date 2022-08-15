@@ -52,7 +52,5 @@ if ($product == null) : ?>
 </form>
 
 <?php
-
-endif;
-
+endif ?>
 Template::footer();

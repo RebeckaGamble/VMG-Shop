@@ -58,7 +58,7 @@ class ProductsDatabase extends Database {
 
         $stmt = mysqli_prepare($this->conn, $query);
 
-        $stmt->bind_param("ssis", $product->title, $product->description, $product->price, $product->img_url);
+        $stmt->bind_param("ssis", $product->title, $product->description, $product->price, $product->img);
 
         $success = $stmt->execute();
 
@@ -70,9 +70,7 @@ class ProductsDatabase extends Database {
         
         $stmt = mysqli_prepare($this->conn, $query);
 
-        $stmt->bind_param("ssisi", $product->title, $product->description, $product->price, $product->img_url, $id);
-
-        $stmt->execute();
+        $stmt->bind_param("ssisi", $product->title, $product->description, $product->price, $product->img, $id);
 
         return $stmt->execute();
 

@@ -13,7 +13,7 @@ $db = new UsersDatabase();
 
 $user = $db->get_one_by_username($username);
 
-Template::header("Edit user");
+Template::header("Uppdatera användare");
 
 ?>
 
@@ -21,12 +21,12 @@ Template::header("Edit user");
     <input type="hidden" name="id" value="<?= $id ?>"> <br>
     <!--syns ej--><label><?= $username ?></label> <br>
     <select name="role" id="role">
-        <option value="role" selected disabled>Role</option>
+        <option value="role" selected disabled>Roll</option>
         <option value="admin">Admin</option>
-        <option value="customer">Customer</option>
+        <option value="customer">Användare</option>
     </select>
     <br><br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Spara">
 </form>
 
 <hr>

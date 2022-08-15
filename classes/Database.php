@@ -3,7 +3,7 @@
 class Database {
     private $host = "localhost";
     private $user = "root";
-    private $pass = "root";
+    private $pass = "";
     private $db = "vmg-db";
 
     protected $conn;

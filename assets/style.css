@@ -141,3 +141,8 @@ img.product-image {
   height: 110px;
   width: 100px;
 }
+
+.linkpage {
+  padding-left: 15%;
+  color: red;
+}

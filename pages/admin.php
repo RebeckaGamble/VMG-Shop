@@ -11,7 +11,7 @@ $is_admin = $is_logged_in && $logged_in_user->role == "admin";
 
 if(!$is_admin) {
     http_response_code(401); 
-    die("Access denied");
+    die("Obehörig!");
 }
 
 $products_db = new ProductsDatabase();
@@ -20,23 +20,23 @@ $users_db = new UsersDatabase();
 $users = $users_db->get_all();
 $products = $products_db->get_all();
 
-Template::header("Admin area"); 
+Template::header("Admin sida"); 
 
 ?>
 
-<h2>Create product</h2>
+<h2>Skapa produkt</h2>
 
 <form action="/vmg/admin-scripts/post-create-product.php" method="post" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Title"> <br>
-    <textarea name="description" placeholder="Description"></textarea> <br>
-    <input type="number" name="price" placeholder="Price"> <br>
+    <input type="text" name="title" placeholder="Titel"> <br>
+    <textarea name="description" placeholder="Beskrivning"></textarea> <br>
+    <input type="number" name="price" placeholder="Pris"> <br>
     <input type="file" name="image" accept="image/*"> <br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Spara">
 </form>
 
 <hr>
 
-<h2>Products</h2>
+<h2>Produkter</h2>
 
 <?php foreach($products as $product): ?>
     <p>
@@ -48,7 +48,7 @@ Template::header("Admin area");
 
 <hr>
 
-<h2>Users</h2>
+<h2>Användare</h2>
 
 <?php foreach($users as $user): ?>
 

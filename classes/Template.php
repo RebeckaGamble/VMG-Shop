@@ -43,26 +43,27 @@ class Template
 
             <nav class="navbar">
                 <a href="/vmg/index.php">Start</a>
-                <a href="/vmg/pages/products.php">Products</a>
-                <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (<?= $cart_count ?>)</a>
+                <a href="/vmg/pages/products.php">Produkter</a>
+                <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i></a>
+                <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i>Kundvagn (<?= $cart_count ?>)</a>
 
                 <?php if (!$is_logged_in) : ?>
-                    <a href="/vmg/pages/login.php">Login</a>
-                    <a href="/vmg/pages/register.php">Register</a>
+                    <a href="/vmg/pages/login.php">Logga in</a>
+                    <a href="/vmg/pages/register.php">Registrera</a>
 
                 <?php elseif ($is_admin) : ?>
-                    <a href="/vmg/pages/admin.php">Admin page</a>
+                    <a href="/vmg/pages/admin.php">Admin sida</a>
                 <?php endif; ?>
 
             </nav>
 
             <?php if ($is_logged_in) : ?>
                 <p>
-                    <b>Logged in as: </b>
+                    <b>Inloggad som: </b>
                     <?= $logged_in_user->username ?>
 
                 <form action="/vmg/scripts/post-logout.php" method="post">
-                    <input type="submit" value="Logout">
+                    <input type="submit" value="Logga ut">
                 </form>
                 </p>
             <?php endif; ?>
@@ -74,6 +75,8 @@ class Template
 
    public static function footer() 
     { 
+        $is_logged_in = isset($_SESSION["user"]);
+
     ?>
         <footer class="footer">
             <div class="footer-container">
@@ -88,22 +91,26 @@ class Template
                             Därför har vi genom ett noga urval av vaser i 
                             olika designer sett till att varje hem kan få en unik look. <br> 
                         </p>
-                        <a href="">Jobba hos oss</a>
+                        <a href="/vmg/pages/linkpages/jobb.php">Jobba hos oss</a>
                     </div>
 
                     <div class="contact">
                         <h3>KONTAKTA OSS</h3>
+                        <?php if($is_logged_in) : ?>
+                            <a href="">Chatta med oss</a>
+
+                        <?php endif; ?>
                         <p><a href="">08 442 34 22</a></p> 
                         <a href="">info@vmg.se</a>
                     </div>
 
                     <div class="info">
                         <h3>INFORMATION</h3>
-                        <p><a href="">Köpvillkor</a></p>
-                        <p><a href="">Frakt/Leverans</a></p>
-                        <p><a href="">Betalning</a></p>
-                        <p><a href="">Retur/Reklamation</a></p>
-                        <p><a href="">Presentkort</a></p>
+                        <p><a href="/vmg/pages/linkpages/fragor.php">Vanliga frågor</a></p>
+                        <p><a href="/vmg/pages/linkpages/kopvillkor.php">Köpvillkor</a></p>
+                        <p><a href="/vmg/pages/linkpages/leverans.php">Frakt/Leverans</a></p>
+                        <p><a href="/vmg/pages/linkpages/betalning.php">Betalning</a></p>
+                        <p><a href="/vmg/pages/linkpages/presentkort.php">Presentkort</a></p>
                     </div>
 
                     <div class="contact">

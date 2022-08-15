@@ -19,4 +19,8 @@ class Product {
         $this->img_url = $img_url;
 
     }
+    public function __toString()
+    {
+        return "{$this->title} {$this->description} {$this->price}";
+    }
 }

@@ -9,8 +9,8 @@ $is_logged_in = isset($_SESSION["user"]);
 $logged_in_user = $is_logged_in ? $_SESSION["user"] : null;
 $is_admin = $is_logged_in && $logged_in_user->role == "admin";
 
-if(!$is_admin) {
-    http_response_code(401); 
+if (!$is_admin) {
+    http_response_code(401);
     die("Access denied");
 }
 
@@ -20,7 +20,7 @@ $users_db = new UsersDatabase();
 $users = $users_db->get_all();
 $products = $products_db->get_all();
 
-Template::header("Admin area"); 
+Template::header("Admin area");
 
 ?>
 
@@ -36,11 +36,27 @@ Template::header("Admin area");
 
 <hr>
 
+<h2>Create user</h2>
+
+<form action="/vmg/admin-scripts/post-create-user.php" method="post" enctype="multipart/form-data">
+    <input type="text" name="username" placeholder="Username"> <br>
+    <input type="text" name="password" placeholder="Password"> <br>
+    <select name="role" id="role">
+        <option value="role" selected disabled>Role</option>
+        <option value="admin">Admin</option>
+        <option value="customer">Customer</option>
+    </select>
+    <br>
+    <input type="submit" name="Save user">
+</form>
+
+<hr>
+
 <h2>Products</h2>
 
-<?php foreach($products as $product): ?>
+<?php foreach ($products as $product) : ?>
     <p>
-        <a href="/vmg/pages/admin-product.php?id=<?= $product->id ?>">
+        <a href="/vmg/pages/admin-product-update.php?id=<?= $product->id ?>">
             <?= $product->title ?>
         </a>
     </p>
@@ -50,12 +66,12 @@ Template::header("Admin area");
 
 <h2>Users</h2>
 
-<?php foreach($users as $user): ?>
+<?php foreach ($users as $user) : ?>
 
     <p>
-        <a href="/vmg/pages/admin-user.php?id=<?= $user->id ?>">
-        <?= $user->username ?>
-        <i><?= $user->role ?></i>
+        <a href="/vmg/pages/admin-edit-user.php?id=<?= $user->id ?>">
+            <?= $user->username ?>
+            <i><?= $user->role ?></i>
         </a>
     </p>
 <?php endforeach; ?>

@@ -48,8 +48,8 @@ class UsersDatabase extends Database {
         return $users;
     }
 
-    public function create($user) {
-        $query = "INSERT INTO users (username, `password-hash`, `role`) VALUES (?, ?, ?)";
+    public function create(User $user) {
+        $query = "INSERT INTO users (`username`, `password-hash`, `role`) VALUES (?, ?, ?)";
 
         $stmt = mysqli_prepare($this->conn, $query);
 
@@ -74,4 +74,13 @@ class UsersDatabase extends Database {
     }
 
     //delete
+    public function delete($id) {
+        $query = "DELETE FROM users WHERE id = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("i", $id);
+
+        return $stmt->execute();
+    }
 }

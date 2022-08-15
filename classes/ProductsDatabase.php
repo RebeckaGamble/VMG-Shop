@@ -18,15 +18,15 @@ class ProductsDatabase extends Database {
 
         $db_product = mysqli_fetch_assoc($result);
 
-        $product = null;
+        $products = null;
 
         if ($db_product) {
 
-            $product = new Product ( $db_product["title"], $db_product["description"], $db_product["price"], $db_product["img-url"], $id );
+            $products = new Product ( $db_product["title"], $db_product["description"], $db_product["price"], $db_product["img_url"], $id );
 
         }
 
-        return $product;
+        return $products;
     }
 
 
@@ -44,7 +44,7 @@ class ProductsDatabase extends Database {
             $db_title = $db_product["title"];
             $db_description = $db_product["description"];
             $db_price = $db_product["price"];
-            $db_img_url = $db_product["img-url"];
+            $db_img_url = $db_product["img_url"];
 
 
             $products[] = new Product($db_title, $db_description, $db_price, $db_img_url, $db_id);
@@ -54,11 +54,11 @@ class ProductsDatabase extends Database {
     }
     
     public function create(Product $product){
-        $query = "INSERT INTO products (title, `description`, price, `img-url`) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO products (`title`, `description`, `price`, `img_url`) VALUES (?, ?, ?, ?)";
 
         $stmt = mysqli_prepare($this->conn, $query);
 
-        $stmt->bind_param("ssis", $product->title, $product->description, $product->price, $product->img);
+        $stmt->bind_param("ssis", $product->title, $product->description, $product->price, $product->img_url);
 
         $success = $stmt->execute();
 
@@ -66,11 +66,11 @@ class ProductsDatabase extends Database {
     }
 
     public function update_product(Product $product, $id){
-        $query = "UPDATE products SET `title`=?, `description`=?, price=?, `img-url`=? WHERE id=?";
+        $query = "UPDATE products SET `title`=?, `description`=?, `price`=?, `img_url`=? WHERE id=?";
         
         $stmt = mysqli_prepare($this->conn, $query);
 
-        $stmt->bind_param("ssisi", $product->title, $product->description, $product->price, $product->img, $id);
+        $stmt->bind_param("ssssi", $product->title, $product->description, $product->price, $product->img_url, $id);
 
         return $stmt->execute();
 

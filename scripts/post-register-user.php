@@ -23,19 +23,19 @@ if (
     $existing_user = $users_db->get_one_by_username($_POST["username"]);
 
     if ($existing_user) {
-        die("Username is taken");
+        die("Användarnamnet är upptaget!");
     }
     else {
        $success = $users_db->create($user);
     }
 }
 else {
-    die("Invalid input");
+    die("Ogiltig input");
 }
 
 if ($success) {
     header ("Location: /vmg/pages/register-success.php");
 }
 else {
-    die("Error saving user");
+    die("Kunde inte spara användare");
 }

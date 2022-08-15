@@ -19,9 +19,9 @@ if(isset($_POST["username"]) && isset($_POST["password"])) {
     else {
         header("Location: /vmg/pages/login.php?error=wrong_pass");
         die();
-        //die("Invalid username or password!");
+        //die("Ogiltigt användarnamn eller lösenord!");
     }
 }
 else {
-    die("Invalid input!");
+    die("Ogiltig input!");
 }

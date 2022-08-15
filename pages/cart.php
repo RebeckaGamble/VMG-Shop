@@ -5,7 +5,9 @@ require_once __DIR__ . "/../classes/Template.php";
 
 $products = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
-Template::header("Cart"); ?>
+Template::header("Kundvagn"); ?>
+
+<h3>Varukorg</h3>
 
 <?php if (!$products) : ?>
     <h2>Cart is empty</h2>
@@ -18,6 +20,7 @@ Template::header("Cart"); ?>
         <p id="product-description"></p>
         <p id="product-price"></p>
     </div>
+
 
     <?php foreach ($products as $product) : ?>
 

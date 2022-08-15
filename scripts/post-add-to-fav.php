@@ -13,15 +13,15 @@ if (isset($_POST["product-id"])) {
     $product = $products_db->get_one($_POST["product-id"]);
 
     //skapa varukorg om inte finns
-    if(!isset($_SESSION["cart"])) {
-        $_SESSION["cart"] = [];
+    if(!isset($_SESSION["fav"])) {
+        $_SESSION["fav"] = [];
     }
 
-    //lägg produkt i varukorg
+    //spara produkt i favoriter
     if ($product) {
-        $_SESSION["cart"][] = $product;
+        $_SESSION["fav"][] = $product;
 
-        header("Location: /vmg/pages/products.php");
+        header("Location: /vmg/pages/fav.php");
         die();
     }
 }
@@ -29,5 +29,5 @@ else {
     die("Ogiltig input");
 }
 
-die("Kunde inte lägga till produkt i kundvagn!");
+die("Kunde inte spara i favoriter!");
 

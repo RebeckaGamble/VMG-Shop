@@ -5,6 +5,7 @@
 
 
 /* --- Header --- */
+
 .header {
   background-image: url("/vmg/assets/back.jpeg");
   min-height: 300px;
@@ -17,9 +18,7 @@
   padding: 0%;
 }
 
-/* --- Nav --- */
-
-.nav-title {
+.header-title {
   color: white;
   font-size: 5em;
   text-shadow: 3px 3px 6px black;
@@ -27,46 +26,211 @@
   position: absolute;
 }
 
-img.product-image {
-  height: 290px;
+.banner {
+  background-color: #f8f8f8;
+  height: 40px;
+  font-size: 12px;
+  color: #76818b;
+  text-align: center;
+  padding: 0.5rem 0;
+  margin: 1px;
+  width: 100%;
+  padding: 15px 25px;
+  letter-spacing: 1.5px;
 }
 
-.navbar {
+
+/* --- Nav --- */
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding-bottom: 3%;
 }
 
+nav a {
+  font-size: 0.9em;
+  text-decoration: none;
+  color: #1e1e1e;
+  padding: 15px 25px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
 
-.about {
-  text-align: center;
+nav a:hover {
+  opacity: 0.7;
+}
+
+
+/* --- Content --- */
+
+.page-title{
+  display: flex;
+  justify-content: center;
 }
 
 body {
   max-width: 100%;
   min-height: 100vh;
-  margin: 20px auto;
-  padding: 2%;
+  margin: auto;
   background: white;
 }
 
-.body2 {
+.body-content {
   background: white;
   max-width: 1000px;
   margin: 20px auto;
-  padding: 10px;
+  padding: 2%;
   box-shadow: 2px 2px 20px 12px #f0f0f0;
   border-radius: 10px;
+  border: 1px solid fuchsia;
 }
 
+img.product-image {
+  width: 100%;
+  height: 100%;
+}
 
-.product {
+img.product-image-cart {
+  width: 15%;
+  height: 100%;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.products-grid-cart {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid gray;
-  margin-bottom: 10px;
+  margin: 20px 0;
+  width: 100%;
 }
 
-/* FOOTER */
+article.product {
+  width: 33%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+article.product-cart {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-text-box{
+  width: 15%;
+}
+
+.logged-in{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -40px;
+}
+
+.product-info{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid violet;
+}
+
+/* --- Buttons --- */
+
+input.btn{
+    padding: 5px 15px;
+    width: 100%;
+    height: 40px;
+    margin-top: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.6s ease;  
+}
+
+.btn:hover{
+  background-color: rgb(78, 185, 78);
+  color: black;
+
+}
+
+input.btn-form{
+  padding: 5px 15px;
+  width: 20%;
+  height: 40px;
+  margin-top: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.6s ease;
+}
+
+.shop-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.google-btn{
+  background-color: #efefef;
+  padding: 5px 15px;
+  width: 20%;
+  height: 40px;
+  margin-top: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.6s ease;
+  font-size: 12.5px;
+}
+
+.google-btn:visited{
+  color: black;
+}
+
+/* --- Forms --- */
+
+input[type=text],
+input[type=number],
+input[type=password],
+textarea,
+select {
+  border: 1px solid black;
+  font-size: 1em;
+  padding: 3px;
+  margin: 3px 0;
+  border-radius: 3px;
+  width: 240px;
+}
+
+.form-user{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* --- Footer --- */
 
 .footer {
   position: relative;
@@ -127,24 +291,8 @@ a:link {
   color: gray;
 }
 
-.banner {
-  background-color: #f8f8f8;
-  height: 40px;
-  font-size: 12px;
-  color: #76818b;
-  text-align: center;
-  padding: 0.5rem 0;
-}
-
-
-img.product-image {
-  height: 110px;
-  width: 100px;
-}
-
 .linkpage {
   padding-left: 15%;
-  color: red;
 }
 
 

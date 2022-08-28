@@ -27,6 +27,10 @@ Template::header("Admin sida");
 
 ?>
 
+<h1 class="page-title">Admin</h1>
+
+<br>
+
 <h2>Skapa produkt</h2>
 
 <form action="/vmg/admin-scripts/post-create-product.php" method="post" enctype="multipart/form-data">
@@ -35,22 +39,6 @@ Template::header("Admin sida");
     <input type="number" name="price" placeholder="Pris"> <br>
     <input type="file" name="image" accept="image/*"> <br>
     <input type="submit" value="Spara">
-</form>
-
-<hr>
-
-<h2>Create user</h2>
-
-<form action="/vmg/admin-scripts/post-create-user.php" method="post" enctype="multipart/form-data">
-    <input type="text" name="username" placeholder="Username"> <br>
-    <input type="text" name="password" placeholder="Password"> <br>
-    <select name="role" id="role">
-        <option value="role" selected disabled>Role</option>
-        <option value="admin">Admin</option>
-        <option value="customer">Användare</option>
-    </select>
-    <br>
-    <input type="submit" name="Save user">
 </form>
 
 <hr>
@@ -67,7 +55,23 @@ Template::header("Admin sida");
 
 <hr>
 
-<h2>Användare</h2>
+<h2>Skapa användare manuellt</h2>
+
+<form action="/vmg/admin-scripts/post-create-user.php" method="post" enctype="multipart/form-data">
+    <input type="text" name="username" placeholder="Username"> <br>
+    <input type="text" name="password" placeholder="Password"> <br>
+    <select name="role" id="role">
+        <option value="role" selected disabled>Role</option>
+        <option value="admin">Admin</option>
+        <option value="customer">Användare</option>
+    </select>
+    <br>
+    <input type="submit" name="Save user">
+</form>
+
+<hr>
+
+<h2>Hantera användare</h2>
 
 <?php foreach ($users as $user) : ?>
     <p>

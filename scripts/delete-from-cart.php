@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 
-    header("Location: /vmg/pages/products.php");
+    header("Location: /vmg/index.php");
     die();
 }
 

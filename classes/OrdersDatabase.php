@@ -80,7 +80,6 @@ class OrdersDatabase extends Database
     }
 
 
-
     // Skapar order och lägger in i tabellen `orders` FÄRDIG!! 
     public function create_order_to_orders(Order $order)
     {

@@ -21,7 +21,7 @@ if (isset($_POST["product-id"])) {
     if ($product) {
         $_SESSION["cart"][] = $product;
 
-        header("Location: /vmg/pages/products.php");
+        header("Location: /vmg/index.php");
         die();
     }
 }

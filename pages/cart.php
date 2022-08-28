@@ -24,7 +24,7 @@ Template::header("Varukorg");
 
 <?php if (!$products) : ?>
     <h2>Varukorgen är tom</h2>
-    <a href="/vmg/pages/products.php">Go to products</a>
+    <a href="/vmg/index.php">Gå tillbaka till startsidan</a>
 
 <?php elseif ($_SESSION["cart"] && $products) : ?>
     <?php foreach ($_SESSION["cart"] as $cart_product) : ?>

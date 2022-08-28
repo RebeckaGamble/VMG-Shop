@@ -5,43 +5,41 @@ require_once __DIR__ . "/../classes/Template.php";
 
 $products = isset($_SESSION["fav"]) ? $_SESSION["fav"] : [];
 
-Template::header("Favoriter"); ?>
+Template::header("VMG SHOP"); ?>
 
-<h3>Mina favoriter</h3>
+<h2 class="page-title">Mina favoriter</h2>
 
 
 <div id="product-details" hidden>
-    <img src="" id="product-img" height="50" width="50">
+    <img src="" id="product-img" class="product-image">
     <p id="product-title"></p>
     <p id="product-description"></p>
     <p id="product-price"></p>
 </div>
 
-<?php foreach ($products as $product): ?>
 
-   
-    <div>
-        <p>
-            <img src="<?= $product->img_url ?>" width="50" height="50" alt="Product image">
-            <b><?= $product->title ?></b>
-            <i><?= $product->price ?> kr</i>
-        
-            <button data-id="<?= $product->id ?>" class="show-product-details">Visa</button>
-        
+<div class="products-grid">
+    <?php foreach ($products as $product) : ?>
+
+
+        <article class="product">
+            <p>
+                <img src="<?= $product->img_url ?>" alt="Product image" class="product-image">
+            <div class="product-info">
+                <b><?= $product->title ?></b>
+                <i><?= $product->price ?> kr</i>
+                <p><?= $product->description ?></p>
+            </div>
+
             <form action="/vmg/scripts/post-add-to-cart.php" method="post">
                 <input type="hidden" name="product-id" value="<?= $product->id ?>">
-                <input type="submit" value="Lägg i kundvagn">
+                <input type="submit" value="Lägg i kundvagn" class="btn">
             </form>
             <hr>
-        </p>
-    </div>
+            </p>
+        </article>
+    <?php endforeach; ?>
+</div>
 
-   
-
-    
 <?php
-    
-endforeach;
-    
 Template::footer();
-    

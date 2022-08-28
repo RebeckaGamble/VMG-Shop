@@ -22,7 +22,12 @@ class ProductsDatabase extends Database {
 
         if ($db_product) {
 
-            $products = new Product ( $db_product["title"], $db_product["description"], $db_product["price"], $db_product["img_url"], $id );
+            $products = new Product ( 
+                $db_product["title"], 
+                $db_product["description"], 
+                $db_product["price"], 
+                $db_product["img_url"], 
+                $id );
 
         }
 
@@ -48,6 +53,40 @@ class ProductsDatabase extends Database {
 
 
             $products[] = new Product($db_title, $db_description, $db_price, $db_img_url, $db_id);
+        }
+
+        return $products;
+    }
+
+    // Get by order_ID from `order_` / Tar emot orderID & produktID och lägger till det i tabellen order-products
+    public function get_by_order_id($order_id)
+    {
+        $query = "SELECT op.id, op.`order_id`, u.username, p.`title`, p.`description`, p.price,  p.`img_url`, o.`user_id`, o.`order_date`, o.`status` FROM `order-products` AS op
+        JOIN orders AS o ON op.`order_id` = o.id 
+        JOIN users AS u ON o.`user_id` = u.id
+        JOIN products AS p ON op.`product_id` = p.id
+        WHERE o.`user_id` = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $db_products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        $products = [];
+
+        foreach ($db_products as $db_product) {
+
+            $product = new Product(
+                $db_product["title"],
+                $db_product["description"],
+                $db_product["price"],
+                $db_product["img_url"],
+
+            );
+
+            $products[] = $product;
         }
 
         return $products;

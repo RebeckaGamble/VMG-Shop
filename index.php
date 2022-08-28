@@ -5,6 +5,7 @@
 require_once __DIR__ . "/classes/Template.php";
 
 Template::header("VMG butik");
+
 ?>
     <div class="about">
 

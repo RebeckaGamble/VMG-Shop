@@ -1,34 +1,40 @@
-<!-- Ej färdigt  -->
-
 <?php
 
 require_once __DIR__ . "/Database.php";
 require_once __DIR__ . "/Order.php";
 
-class Ordersdatabase extends Order
+
+class OrdersDatabase extends Database
 {
 
+    // Ska hämta alla ordrar från alla användare, när man är inloggad som admin. FÄRDIG!! 
     public function get_all_orders()
     {
         $query = "SELECT * FROM orders";
 
-        $result = mysqli_query($this->conn, $query);
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
 
         $db_orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         $orders = [];
 
         foreach ($db_orders as $db_order) {
-            $db_id = $db_order["id"];
-            $db_customer_id = $db_order["customer_id"];
-            $db_status = $db_order["status"];
-            $db_date = $db_order["date"];
-
-            $orders[] = new Order($db_customer_id, $db_status, $db_date, $db_id);
+            $orders[] = new Order (
+                $db_order["user_id"], 
+                $db_order["status"], 
+                $db_order["order_date"], 
+                $db_order["id"]
+            );
         }
         return $orders;
     }
-    public function get_one_order($id)
+
+    // Hämtar en order, med specifik order nummer från tabellen orders. Används från admin sidan. FÄRDIG!! 
+    public function get_order_by_order_id($id)
     {
         $query = "SELECT * FROM orders WHERE id = ?";
 
@@ -40,15 +46,104 @@ class Ordersdatabase extends Order
 
         $result = $stmt->get_result();
 
-        $db_orders = mysqli_fetch_assoc($result);
+        $db_order = mysqli_fetch_assoc($result);
 
-        $orders = null;
+        $order = null;
 
-        if ($db_orders) {
+        if ($db_order) {
+            $db_id = $db_order["id"];
+            $db_user_id = $db_order["user_id"];
+            $db_status = $db_order["status"];
+            $db_order_date = $db_order["order_date"];
 
-            $orders = new Order($db_orders["customer_id"], $db_orders["status"], $db_orders["date"], $id);
+            $order = new Order($db_user_id, $db_status, $db_order_date, $db_id);
         }
+        return $order;
+    }
+
+    // Hämtar alla ordrar som man beställt som användare, poppar upp på pages/orders FÄRDIG!! 
+    public function get_order_by_user_id($user_id)
+    {
+        $query = "SELECT * FROM `orders` where `user_id` = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("i", $user_id);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         return $orders;
+    }
+
+
+
+    // Skapar order och lägger in i tabellen `orders` FÄRDIG!! 
+    public function create_order_to_orders(Order $order)
+    {
+         $query = "INSERT INTO `orders` (`user_id`, `status`, `order_date`) VALUES (?, ?, ?)";
+
+         $stmt = mysqli_prepare($this->conn, $query);
+
+         $stmt->bind_param("iss", $order->user_id, $order->status, $order->order_date);
+
+         $success = $stmt->execute();
+
+        if($success) {
+            return $stmt->insert_id;
+        }
+        return false;
+    }
+
+    // Skapar `order-products` så att tabellen från ´products`+ `orders`sätts ihop FÄRDIG!
+    public function create_order_to_order_products($order_id, $product_id)
+    {
+        $query = "INSERT INTO `order-products` (`order_id`, `product_id`) VALUES (?,?)";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("ii", $order_id, $product_id);
+
+        $success = $stmt->execute();
+
+        return $success;
+    }
+
+    // Get by order_ID from `order_` / Tar emot orderID & produktID och lägger till det i tabellen order-products
+    public function get_products_by_order_id($order_id)
+    {
+        $query =
+        "SELECT * FROM `order-products` 
+        JOIN orders ON orders.id = `order-products`.`order_id` 
+        JOIN products ON products.id = `order-products`.`product_id` 
+        WHERE order_id = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("i", $order_id);
+
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+
+        $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        return $products;
+    }
+
+    // Updatera status
+    public function update_status($order_id, $status) {
+        $query = "UPDATE orders SET `status` = ? WHERE id = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("si", $status, $order_id);
+
+        $success = $stmt->execute();
+
+        return $success;
     }
 }

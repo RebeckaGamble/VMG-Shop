@@ -1,21 +1,40 @@
 <?php
 // http://localhost/vmg/
 
-
+require_once __DIR__ . "/classes/Product.php";
+require_once __DIR__ . "/classes/ProductsDatabase.php";
 require_once __DIR__ . "/classes/Template.php";
 
-Template::header("VMG butik");
-?>
-    <div class="about">
+$products_db = new ProductsDatabase();
 
-        <h2>Om oss</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Tempore commodi cum veniam tempora vitae nam, voluptate consectetur. 
-            Assumenda repellat deleniti distinctio optio vel, qui veniam 
-            cupiditate hic itaque culpa ab?
-        </p>
-    </div>
+$products = $products_db->get_all();
 
+Template::header("Produkter");
+
+foreach($products as $product): ?>
+
+<div class="product">
+    <img src="<?= $product->img_url ?>" alt="Product image" class="product-image">
+    <b><?= $product->title ?></b>
+    <i><?= $product->price ?> kr</i>
+    <p><?= $product->description ?></p>
     
+
+    <form action="/vmg/scripts/post-add-to-cart.php" method="post">
+        <input type="hidden" name="product-id" value="<?= $product->id ?>">
+        <input type="submit" value="Lägg i kundvagn">
+    </form>
+    <form action="/vmg/scripts/post-add-to-fav.php" method="post">
+        <input type="hidden" name="product-id" value="<?= $product->id ?>">
+        <input type="submit" value="Spara i favoriter">
+       
+        <!-- <button type="submit"><i class="fa-regular fa-heart"></button>  -->
+    </form>
+    
+</div>
+
 <?php
+
+endforeach;
+
 Template::footer();

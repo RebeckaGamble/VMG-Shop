@@ -45,9 +45,11 @@ class Template
 
                         <nav class="navbar">
                             <a href="/vmg/index.php">Start</a>
-                            <a href="/vmg/pages/products.php">Produkter</a>
-                            <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i></a>
-                            <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i>Kundvagn (<?= $cart_count ?>)</a>
+
+                            <form action="/vmg/scripts/post-search.php" method="post">
+                                <input type="text" placeholder="Search.." name="search">
+                                <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+                            </form>
 
                             <?php if (!$is_logged_in) : ?>
                                 <a href="/vmg/pages/login.php">Logga in</a>
@@ -56,7 +58,14 @@ class Template
                             <?php elseif ($is_admin) : ?>
                                 <a href="/vmg/pages/admin.php">Admin sida</a>
                             <?php endif; ?>
+                            <?php if ($is_logged_in) : ?>
+                                <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i></a>
+                                <?php endif; ?>
 
+
+                            <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i>Kundvagn (<?= $cart_count ?>)</a>
+
+                                
                         </nav>
 
                         <?php if ($is_logged_in) : ?>
@@ -97,11 +106,11 @@ class Template
                                     <div class="contact">
                                         <h3>KONTAKTA OSS</h3>
                                         <?php if ($is_logged_in) : ?>
-                                            <a href="">Chatta med oss</a>
+                                            <a href="/vmg/pages/linkpages/chat.php">Chatta med oss</a>
 
                                         <?php endif; ?>
                                         <p><a href="">08 442 34 22</a></p>
-                                        <a href="">info@vmg.se</a>
+                                        <a href="mailto:info@vmg.se">Mejla Kundservice</a>
                                     </div>
 
                                     <div class="info">
@@ -128,7 +137,7 @@ class Template
 
                                 <div class="bottom">
                                     <h2 class="bottom-title">VMG.se</h2>
-                                    <p>Copyright 2022 VMG.se </p>
+                                    <p>Copyright <?php echo date ("Y")?> VMG.se </p>
                                     <p>Org.nr 556030-3189</p>
                                 </div>
                             </div>

@@ -48,8 +48,8 @@ class UsersDatabase extends Database {
         return $users;
     }
 
-    public function create($user) {
-        $query = "INSERT INTO users (username, `password-hash`, `role`) VALUES (?, ?, ?)";
+    public function create(User $user) {
+        $query = "INSERT INTO users (`username`, `password-hash`, `role`) VALUES (?, ?, ?)";
 
         $stmt = mysqli_prepare($this->conn, $query);
 
@@ -74,4 +74,40 @@ class UsersDatabase extends Database {
     }
 
     //delete
+    public function delete($id) {
+        $query = "DELETE FROM users WHERE id = ?";
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param("i", $id);
+
+        return $stmt->execute();
+    }
+
+    //google login
+    public function get_google_user_id(User $user)
+   {
+       $db_user = $this->get_one_by_username($user->username);
+
+       if ($db_user == null) {
+
+           $query = "INSERT INTO users (username, `role`) VALUES (?,?)";
+
+           $stmt = mysqli_prepare($this->conn, $query);
+
+           $stmt->bind_param("ss", $user->username, $user->role);
+
+           $success = $stmt->execute();
+
+           if ($success) {
+               $user->id = $stmt->insert_id;
+           } else {
+            var_dump($stmt->error);
+            die("Error saving google user");
+           }
+       } else {
+           $user = $db_user;
+       }
+       return $user->id;
+   }
 }

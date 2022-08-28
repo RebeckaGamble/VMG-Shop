@@ -21,13 +21,13 @@ if (isset($_POST["product-id"])) {
     if ($product) {
         $_SESSION["cart"][] = $product;
 
-        header("Location: /vmg/pages/products.php");
+        header("Location: /vmg/index.php");
         die();
     }
 }
 else {
-    die("Invalid input");
+    die("Ogiltig input");
 }
 
-die("Error adding product to cart!");
+die("Kunde inte lägga till produkt i kundvagn!");
 

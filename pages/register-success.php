@@ -2,12 +2,12 @@
 
 require_once __DIR__ . "/../classes/Template.php";
 
-Template::header("Login");
+Template::header("VMG SHOP");
 
 ?>
 
-<h1>REGISTER SUCCESS!</h1>
-<a href="/vmg/pages/login.php">Go to log-in page</a>
+<h2 class="page-title">Registrering slutförd</h2>
+<a href="/vmg/pages/login.php">Logga in</a>
 
 <?php
 

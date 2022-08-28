@@ -32,7 +32,7 @@ Template::header("Change status on order: {$_GET["id"]}", "");
             <?= $product["price"] ?>
         </p>
     </div>
-<? endforeach ?>
+<? endforeach; ?>
 
 <!-- Order info + produkter i beställningen -->
 <p>

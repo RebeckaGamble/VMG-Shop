@@ -15,7 +15,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 $logged_in_user = $is_logged_in ? $_SESSION['user'] : null;
 
 if (!$cart) {
-    header("Location: /myweb/pages/cart.php");
+    header("Location: /vmg/pages/cart.php");
 }
 
 // Om det finns något i korgen samt är inloggad, då kan man lägga en order. // Färdig till rad 33.

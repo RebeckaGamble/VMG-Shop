@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . "/classes/ProductsDatabase.php";
 require_once __DIR__ . "/classes/Template.php";
 
@@ -9,7 +8,6 @@ $products = $products_db->get_all();
 Template::header("VMG SHOP "); ?>
 
 <!-- PRODUKTER -->
-
 <h2 class="page-title">Produkter</h2>
 <main class="products-grid">
     <?php foreach ($products as $product) :  ?>
@@ -35,7 +33,8 @@ Template::header("VMG SHOP "); ?>
         </article>
     <?php endforeach; ?>
     </main>
-
+    
+    
 <?php
 
 

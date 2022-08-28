@@ -29,12 +29,10 @@ Template::header("Varukorg");
 <?php elseif ($_SESSION["cart"] && $products) : ?>
     <?php foreach ($_SESSION["cart"] as $cart_product) : ?>
         <article>
-            <img src="<?= $cart_product->img_url ?>" width="50" height="50" alt="Product image">
+            <img src="<?= $cart_product->img_url ?>" width="50" height="50" alt="Product image" >
             <div>
                 <b><?= $cart_product->title ?></b>
                 <i><?= $cart_product->price ?> kr</i>
-
-
             </div>
 
             </form>

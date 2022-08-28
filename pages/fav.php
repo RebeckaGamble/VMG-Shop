@@ -9,6 +9,10 @@ Template::header("VMG SHOP"); ?>
 
 <h2 class="page-title">Mina favoriter</h2>
 
+<?php if (!$products) : ?>
+    <h3 style="color: gray">Inga favoriter sparade</h2>
+    <a href="/vmg/index.php">Gå till produkter</a>
+<?php endif; ?>
 
 <div id="product-details" hidden>
     <img src="" id="product-img" class="product-image">

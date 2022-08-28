@@ -125,4 +125,30 @@ class ProductsDatabase extends Database {
 
         return $stmt->execute();
     }
+
+    public function search(){
+        $search = $_POST['search'];
+        //$search = $mysqli -> real_escape_string($search);
+
+        $query = "SELECT * FROM products WHERE title LIKE '%$search%' 
+        OR `description` LIKE '%$search%'";
+
+        $result = mysqli_query($this->conn, $query);
+
+        $db_products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        $products= [];
+
+        foreach($db_products as $db_product){
+            $db_id = $db_product["id"];
+            $db_title = $db_product["title"];
+            $db_description = $db_product["description"];
+            $db_price = $db_product["price"];
+            $db_img_url = $db_product["img_url"];
+
+
+            $products[] = new Product($db_title, $db_description, $db_price, $db_img_url, $db_id);
+        }
+        return $products;
+    }
 }

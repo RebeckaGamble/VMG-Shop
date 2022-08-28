@@ -11,7 +11,7 @@ Template::header("VMG SHOP"); ?>
 
 <?php if (!$products) : ?>
     <h2>Cart is empty</h2>
-    <a href="/vmg/pages/products.php">Go to products</a>
+    <a href="/vmg/index.php">Go to products</a>
 
 <?php elseif ($_SESSION["cart"]) : ?>
     <div id="product-details" hidden>
@@ -44,8 +44,6 @@ Template::header("VMG SHOP"); ?>
                 <a href="vmg/scripts/delete-from-cart.php" class="cart-text-box">Delete</a>
                 <!-- <button data-id="<?= $product->id ?>" class="show-product-details">Show</button> -->
             </article>
-
-
         <?php endforeach ?>
     </div>
     <a href="/vmg/pages/orders.php">Checkout</a>

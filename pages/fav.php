@@ -30,8 +30,7 @@ Template::header("VMG SHOP"); ?>
                 <i><?= $product->price ?> kr</i>
                 <p><?= $product->description ?></p>
             </div>
-        
-            <button data-id="<?= $product->id ?>" class="show-product-details">Visa</button>
+    
 
             <form action="/vmg/scripts/post-add-to-cart.php" method="post">
                 <input type="hidden" name="product-id" value="<?= $product->id ?>">

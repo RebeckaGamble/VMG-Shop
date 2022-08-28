@@ -79,9 +79,7 @@ class Template
                         
                         <?php endif; ?>
                     </div>
-
                 
-                    <hr>
                     <main>
                     <?php
                 }
@@ -91,7 +89,6 @@ class Template
                     $is_logged_in = isset($_SESSION["user"]);
                     ?>
                     </main>
-                    
                     <footer class="footer">
                         <div class="footer-container">
                             <div class="about">

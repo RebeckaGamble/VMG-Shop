@@ -3,24 +3,27 @@
 require_once __DIR__ . "/../classes/Template.php";
 require_once __DIR__ . "/../classes/ProductsDatabase.php";
 require_once __DIR__ . "/../classes/UsersDatabase.php";
+require_once __DIR__ . "/../classes/OrdersDatabase.php";
 
 
 $is_logged_in = isset($_SESSION["user"]);
 $logged_in_user = $is_logged_in ? $_SESSION["user"] : null;
 $is_admin = $is_logged_in && $logged_in_user->role == "admin";
 
-if(!$is_admin) {
-    http_response_code(401); 
+if (!$is_admin) {
+    http_response_code(401);
     die("Obehörig!");
 }
 
 $products_db = new ProductsDatabase();
 $users_db = new UsersDatabase();
+$orders_db = new OrdersDatabase();
 
 $users = $users_db->get_all();
 $products = $products_db->get_all();
+$orders = $orders_db->get_all_orders();
 
-Template::header("VMG SHOP"); 
+Template::header("Admin sida");
 
 ?>
 
@@ -71,12 +74,26 @@ Template::header("VMG SHOP");
 <h2>Hantera användare</h2>
 
 <?php foreach ($users as $user) : ?>
-
     <p>
         <a href="/vmg/pages/admin-edit-user.php?id=<?= $user->id ?>">
             <?= $user->username ?>
             <i><?= $user->role ?></i>
         </a>
+    </p>
+<?php endforeach; ?>
+
+<hr>
+
+<h2>Customer Orders</h2>
+<?php foreach ($orders as $order) : ?>
+    <p>
+        <a href="/vmg/pages/admin-edit-status.php?id=<?= $order->id ?>">
+        Order: <?= $order->id ?> 
+        </a> <br>
+
+        <i> User # <?= $order->user_id ?> </i> <br>
+        <i> Status: </i><?= $order->status ?> </i> <br>
+        <i> Date: <?= $order->order_date ?> </i>
     </p>
 <?php endforeach; ?>
 

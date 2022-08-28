@@ -2,28 +2,39 @@
 
 require_once __DIR__ . "/../classes/Template.php";
 require_once __DIR__ . "/../classes/User.php";
-require_once __DIR__ . "/../classes/OrdersDatabase.php";
 require_once __DIR__ . "/../classes/UsersDatabase.php";
+require_once __DIR__ . "/../classes/OrdersDatabase.php";
+require_once __DIR__ . "/../classes/ProductsDatabase.php";
 require_once __DIR__ . "/../classes/Product.php";
 
 $is_logged_in = isset($_SESSION["user"]);
 $logged_in_user = $is_logged_in ? $_SESSION["user"] : null;
 
-if (!$logged_in_user) {
-    http_response_code(401);
-    die("Access denied");
-}
+$products_db = new ProductsDatabase();
+$products = $products_db->get_all();
 
-// $user = $_SESSION["user"];
+$orders_db = new OrdersDatabase();
+$orders = $orders_db->get_order_by_user_id($logged_in_user->id);
 
-// $orders_db = new Ordersdatabase();
+Template::header("Dina beställningar", "");
+foreach ($orders as $order) : $order_products = $orders_db->get_products_by_order_id($order["id"]);
+?>
 
-// $orders = $orders_db->get_one_order($user->id);
+    <h3> Order summary </h3>
+    <?php foreach ($order_products as $product) : ?>
+        <div>
+            <img src="<?= $product["img_url"] ?>" height="50" width="50" alt="<?= $product["title"] ?>">
+            <i> <?= $product["title"] ?> </i>
+            <i> <?= $product["price"] ?> kr</i>
+        </div>
+    <?php endforeach ?>
 
-Template::header("Your orders", "");
+    <p>
+        <b> Status: <?= $product["status"] ?> </b>
+    </p>
 
-// foreach ($orders as $order) : 
+<?php endforeach ?>
 
-
-
+<?php
+Template::footer();
 ?>

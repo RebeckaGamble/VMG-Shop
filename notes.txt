@@ -1,0 +1,4 @@
+// if (!$logged_in_user) {
+//     http_response_code(401);
+//     die("Obehörig!");
+// }

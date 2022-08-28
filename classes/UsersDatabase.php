@@ -41,14 +41,17 @@ class UsersDatabase extends Database {
         $users = [];
 
         foreach($db_users as $db_user) {
-            $user = new User($db_user["username"], $db_user["role"], $db_user["id"]);
+            $user = new User($db_user["username"], 
+            $db_user["role"], 
+            $db_user["id"]);
+            
             $users[] = $user;
         }
 
         return $users;
     }
 
-    public function create(User $user) {
+    public function  create(User $user) {
         $query = "INSERT INTO users (`username`, `password-hash`, `role`) VALUES (?, ?, ?)";
 
         $stmt = mysqli_prepare($this->conn, $query);

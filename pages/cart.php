@@ -2,52 +2,73 @@
 
 require_once __DIR__ . "/../classes/Product.php";
 require_once __DIR__ . "/../classes/Template.php";
+require_once __DIR__ . "/../classes/UsersDatabase.php";
 
 $products = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+$total_sum = array_sum(array_column($products, 'price'));
+$is_logged_in = isset($_SESSION["user"]);
+$logged_in_user = $is_logged_in ? $_SESSION["user"] : null;
 
-Template::header("VMG SHOP"); ?>
+
+Template::header("Varukorg");
+
+
+?>
 
 <h2 class="page-title">Varukorg</h2>
 
-<?php if (!$products) : ?>
-    <h2>Cart is empty</h2>
-    <a href="/vmg/index.php">Go to products</a>
+<div id="product-details" hidden>
+    <img src="" id="product-img" height="70" width="70">
+    <p id="product-name"></p>
+    <p id="product-description"></p>
+    <p id="product-price"></p>
+</div>
 
-<?php elseif ($_SESSION["cart"]) : ?>
-    <div id="product-details" hidden>
-        <img src="" id="product-img" height="50" width="50">
-        <p id="product-title"></p>
-        <p id="product-description"></p>
-        <p id="product-price"></p>
-    </div>
+<?php if (!$products) : ?>
+    <h2>Varukorgen är tom</h2>
+    <a href="/vmg/index.php">Gå tillbaka till startsidan</a>
+
+<?php elseif ($_SESSION["cart"] && $products) : ?>
 
     <div class="products-grid-cart">
-        <?php foreach ($products as $product) : ?>
+    <?php foreach ($_SESSION["cart"] as $cart_product) : ?>
+        <article class="product-cart">
+            <img src="<?= $cart_product->img_url ?>" class="product-image-cart" alt="Product image">
+            <div>
+                <b><?= $cart_product->title ?></b>
+                <i><?= $cart_product->price ?> kr</i>
 
 
-            <article class="product-cart">
-                <img src="<?= $product->img_url ?>" alt="Product image" class="product-image-cart">
-                <b class="cart-text-box"><?= $product->title ?></b>
-                <i class="cart-text-box"><?= $product->price ?> kr</i>
-                <select name="quantity" id="<?= $_GET["id"] ?>">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                <a href="vmg/scripts/delete-from-cart.php" class="cart-text-box">Delete</a>
-                <!-- <button data-id="<?= $product->id ?>" class="show-product-details">Show</button> -->
+            </div>
+
+            </form>
             </article>
         <?php endforeach ?>
-    </div>
-    <a href="/vmg/pages/orders.php">Checkout</a>
-<?php endif ?>
+        </div>
 
-<?php
-Template::footer();
+        <?php if (count($products) > 0) : ?>
+            <h3> Total:
+                <?= $total_sum ?> kr
+            </h3>
+            <form action="/vmg/scripts/delete-from-cart.php" method="POST">
+                <input type="hidden" name="product-id" value="<?= $cart_product->id ?>">
+                <input type="submit" value="Töm kundkorg" class="btn-red">
+            </form>
+        <?php endif ?>
+        
+
+        <?php if (!$is_logged_in) : ?>
+            <button><a href="/vmg/pages/register.php">Skapa konto</a></button>
+            eller
+            <button><a href="/vmg/pages/login.php">Logga in för avsluta köpet</a></button>
+
+        <?php elseif ($is_logged_in) : ?>
+            <form action="/vmg/scripts/post-place-order.php" method="post">
+                <input type="submit" value="Place order" class="btn">
+            </form>
+
+        <?php endif ?>
+    <?php endif ?>
+
+    <?php
+    Template::footer();

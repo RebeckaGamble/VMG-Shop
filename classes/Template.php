@@ -3,6 +3,14 @@ require_once __DIR__ . "/User.php";
 
 session_start();
 
+//Include Google Configuration File
+require_once __DIR__ . "/../google-config.php";
+
+if (!isset($_SESSION['access_token'])) {
+    //Create a URL to obtain user authorization
+    $google_login_btn = '<a href="' . $google_client->createAuthUrl() . '">Login with Google</a>';
+}
+
 class Template
 {
     public static function header($title)
@@ -32,56 +40,64 @@ class Template
 
         <body>
             <p class="banner">
-                Fri frakt över 499 kr
-                Snabb klimatkompenserad leverans
-                Säkra betalningar
+                Fri frakt över 799 kr - Snabb klimatkompenserad leverans - Säkra betalningar
             </p>
-            <div class="body2">
+            <div class="body-content">
                 <div class="header">
 
-                    <h1 class="nav-title"><?= $title ?></h1>
+                    <h1 class="header-title"><?= $title ?></h1>
                 </div>
 
 
-                        <nav class="navbar">
-                            <a href="/vmg/index.php">Start</a>
+                       
 
-                            <form action="/vmg/scripts/post-search.php" method="post">
-                                <input type="text" placeholder="Search.." name="search">
-                                <button type="submit" name="submit"><i class="fa fa-search"></i></button>
-                            </form>
+                           
+                <nav class="navbar">
+                    <a href="/vmg/index.php">Start</a>
 
-                            <?php if (!$is_logged_in) : ?>
-                                <a href="/vmg/pages/login.php">Logga in</a>
-                                <a href="/vmg/pages/register.php">Registrera</a>
+                    <form action="/vmg/scripts/post-search.php" method="post">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+                    </form>
 
-                            <?php elseif ($is_admin) : ?>
-                                <a href="/vmg/pages/admin.php">Admin sida</a>
-                            <?php endif; ?>
-                            <?php if ($is_logged_in) : ?>
-                                <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i></a>
-                                <?php endif; ?>
+                    <?php if (!$is_logged_in) : ?>
+                        <a href="/vmg/pages/login.php">Logga in</a>
+                        <a href="/vmg/pages/register.php">Registrera</a>
+
+                    <?php elseif ($is_admin) : ?>
+                        <a href="/vmg/pages/admin.php">Admin sida</a>
+                    <?php endif; ?>
+
+                    <?php if ($is_logged_in) : ?>
+                        <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i> Favoriter</a>
+                    <?php endif; ?>
+
+                    <?php if ($is_logged_in) : ?>
+                        <a href="/vmg/pages/orders.php"> Beställningar </a>
+                    <?php endif; ?>
 
 
-                            <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i>Kundvagn (<?= $cart_count ?>)</a>
+                    <a href="/vmg/pages/cart.php"><i class="fa-solid fa-cart-shopping"></i> Varukorg (<?= $cart_count ?>)</a>
+                </nav>
 
-                                
-                        </nav>
+                <?php if ($is_logged_in) : ?>
+                    <div class="logged-in">
+                        <p>
+                            <b>Inloggad som: </b>
+                            <?= $logged_in_user->username ?>
+                        </p>
+                        <form action="/vmg/scripts/post-logout.php" method="post">
+                            <input type="submit" value="Logga ut" class="btn">
+                        </form>
 
-                        <?php if ($is_logged_in) : ?>
-                            <p>
-                                <b>Inloggad som: </b>
-                                <?= $logged_in_user->username ?> 
+                    <?php endif; ?>
+                    </div>
 
-                            <form action="/vmg/scripts/post-logout.php" method="post">
-                                <input type="submit" value="Logga ut">
-                            </form>
-                            </p>
-                        <?php endif; ?>
-                        <hr>
-                        
+
+                    <hr>
+                    <main>
                     <?php
-                } 
+                }
 
                 public static function footer()
                 {
@@ -141,9 +157,12 @@ class Template
                                     <p>Org.nr 556030-3189</p>
                                 </div>
                             </div>
-                        </footer>
 
-                        <script src="/vmg/assets/script.js"></script>
+                            
+                        </div>
+                    </footer>
+            </div>
+            <script src="/vmg/assets/script.js"></script>
 
         </body>
 

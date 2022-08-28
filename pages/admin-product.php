@@ -53,5 +53,5 @@ if ($product == null) : ?>
 
 <?php
 endif ?>
-<?php
-Template::footer();
+
+<?php Template::footer();

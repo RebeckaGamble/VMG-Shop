@@ -1,40 +1,41 @@
 <?php
-// http://localhost/vmg/
-
-require_once __DIR__ . "/classes/Product.php";
 require_once __DIR__ . "/classes/ProductsDatabase.php";
 require_once __DIR__ . "/classes/Template.php";
 
 $products_db = new ProductsDatabase();
-
 $products = $products_db->get_all();
 
-Template::header("Produkter");
+Template::header("VMG SHOP "); ?>
 
-foreach($products as $product): ?>
-
-<div class="product">
-    <img src="<?= $product->img_url ?>" alt="Product image" class="product-image">
-    <b><?= $product->title ?></b>
-    <i><?= $product->price ?> kr</i>
-    <p><?= $product->description ?></p>
+<!-- PRODUKTER -->
+<h2 class="page-title">Produkter</h2>
+<main class="products-grid">
+    <?php foreach ($products as $product) :  ?>
+        <article class="product">
+            <img src="<?= $product->img_url ?>" alt="Product image" class="product-image">
+            <div class="product-info">
+                <b><?= $product->title ?></b>
+                <i><?= $product->price ?> kr</i>
+                <p><?= $product->description ?></p>
+            </div>
+            <!--Kundvagn-->
+            <div class="shop-btn">
+                <form action="/vmg/scripts/post-add-to-cart.php" method="post">
+                    <input type="hidden" name="product-id" value="<?= $product->id ?>">
+                    <input type="submit" value="Lägg i kundvagn" class="btn">
+                </form>
+                <!--Favorit-->
+                <form action="/vmg/scripts/post-add-to-fav.php" method="post">
+                    <input type="hidden" name="product-id" value="<?= $product->id ?>">
+                    <input type="submit" value="Spara som favorit" class="btn">
+                </form>
+            </div>
+        </article>
+    <?php endforeach; ?>
+    </main>
     
-
-    <form action="/vmg/scripts/post-add-to-cart.php" method="post">
-        <input type="hidden" name="product-id" value="<?= $product->id ?>">
-        <input type="submit" value="Lägg i kundvagn">
-    </form>
-    <form action="/vmg/scripts/post-add-to-fav.php" method="post">
-        <input type="hidden" name="product-id" value="<?= $product->id ?>">
-        <input type="submit" value="Spara i favoriter">
-       
-        <!-- <button type="submit"><i class="fa-regular fa-heart"></button>  -->
-    </form>
     
-</div>
-
 <?php
 
-endforeach;
 
 Template::footer();

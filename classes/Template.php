@@ -56,21 +56,20 @@ class Template
                     <a href="/vmg/index.php">Start</a>
 
                     <form action="/vmg/scripts/post-search.php" method="post">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+                        <input type="text" placeholder="Sök.." name="search" class="search-text-area">
+                        <button type="submit" name="submit" class="search-button">Sök</button>
                     </form>
+                    <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i> Favoriter</a>
 
                     <?php if (!$is_logged_in) : ?>
                         <a href="/vmg/pages/login.php">Logga in</a>
                         <a href="/vmg/pages/register.php">Registrera</a>
+                        
 
                     <?php elseif ($is_admin) : ?>
                         <a href="/vmg/pages/admin.php">Admin sida</a>
                     <?php endif; ?>
 
-                    <?php if ($is_logged_in) : ?>
-                        <a href="/vmg/pages/fav.php"><i class="fa-regular fa-heart"></i> Favoriter</a>
-                    <?php endif; ?>
 
                     <?php if ($is_logged_in) : ?>
                         <a href="/vmg/pages/orders.php"> Beställningar </a>
@@ -92,9 +91,7 @@ class Template
 
                     <?php endif; ?>
                     </div>
-
-
-                    <hr>
+                
                     <main>
                     <?php
                 }
